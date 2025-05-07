@@ -1,10 +1,10 @@
 import express from "express";
 import http from "http";
+import dotenv from "dotenv";
 import { Server } from "socket.io";
 import cors from "cors";
 import Game from "./models/Game.js";
 import { connectDB } from "./config/DB.js";
-import dotenv from "dotenv";
 
 dotenv.config({
   path: ".env",
