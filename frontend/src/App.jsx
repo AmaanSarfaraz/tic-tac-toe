@@ -24,17 +24,17 @@ function App() {
   const [isPaused, setIsPaused] = useState(false);
   const [winner, setWinner] = useState(null);
   const [players, setPlayers] = useState([]);
-  const [status, setStatus] = useState("Enter a room ID to join");
+  const [status, setStatus] = useState("");
   const socketRef = useRef(null);
 
   useEffect(() => {
     if (joinedRoom) {
-      const newSocket = io(SERVER_URL);
-      socketRef.current = newSocket;
+      const socket = io(SERVER_URL);
+      socketRef.current = socket;
 
-      newSocket.emit("joinRoom", { roomId, playerId });
+      socket.emit("joinRoom", { roomId, playerId });
 
-      newSocket.on("gameState", (gameState) => {
+      socket.on("gameState", (gameState) => {
         setBoard(gameState.board);
         setCurrentPlayer(gameState.currentPlayer);
         setIsPaused(gameState.isPaused);
@@ -70,7 +70,7 @@ function App() {
       });
 
       return () => {
-        newSocket.disconnect();
+        socket.disconnect();
       };
     }
   }, [joinedRoom, roomId, playerId]);
