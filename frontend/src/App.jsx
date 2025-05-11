@@ -96,7 +96,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Tic Tac Toe Multiplayer</h1>
+      <h1>
+        Multiplayer <br /> Tic Tac Toe
+      </h1>
 
       {!joinedRoom ? (
         <div className="join-room">
